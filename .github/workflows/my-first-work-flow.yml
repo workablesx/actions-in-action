@@ -22,6 +22,7 @@ on:
       tag:
         description: 'Apply tag after successful run'
         required: true
+        type: boolean
 
       environment:
         description: 'Environment to run test against'
