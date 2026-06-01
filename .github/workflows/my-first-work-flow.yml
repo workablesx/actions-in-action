@@ -5,6 +5,28 @@ on:
       - main
 
   workflow_dispatch: 
+    inputs:
+      homedrive:
+        description: 'the home drive of the machine' 
+        required: true
+
+      logLevel:
+        description: 'Log level'
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+
+      tag:
+        description: 'Apply tag after successful run'
+        required: true
+
+      environment:
+        description: 'Environment to run test against'
+        type: environment
+        required: true
 
 jobs:
   MyFirstJob:
