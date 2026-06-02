@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: "job 2"  
         run: "echo Job: ${{ github.job }}"
-        shell: bash
+        shell: bash  # python,
   
   job_3:
     runs-on: ubuntu-latest
