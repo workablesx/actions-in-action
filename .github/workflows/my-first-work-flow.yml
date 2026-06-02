@@ -1,8 +1,17 @@
 name: My First workflow
 on:
-  push: 
+  pull_request:  
     branches:
       - main
+    paths: 
+      - 'doc/**' #globbing patterns. **/*.clj, src/**/*.clj, src/*.clj, *.clj
+      - '**/*.clj'
+  
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.clj'
 
   workflow_dispatch: 
     inputs:
@@ -22,7 +31,6 @@ on:
       tag:
         description: 'Apply tag after successful run'
         required: true
-        type: boolean
 
       environment:
         description: 'Environment to run test against'
@@ -43,6 +51,11 @@ jobs:
         run: |
           echo The repository ${{ github.repository }} contains the following files
           tree
-    
-  
-
+      
+      - name: workflow inputs
+        run: |
+          echo "Homedrive: ${{inputs.homedrive}}"
+          echo "Log level: ${{inputs.loglevel}}"
+          echo "Tag source: ${{inputs.tag}}"
+          echo "Environment: ${{inputs.environment}}"
+        if: ${{github.event_name == 'workflow_dispatch'}}
