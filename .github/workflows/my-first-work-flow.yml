@@ -35,28 +35,40 @@ on:
 
       environment:
         description: 'Environment to run test against'
-        type: environment
+        type: environment 
         required: true
 
 jobs:
-  MyFirstJob:
+  # MyFirstJob:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - run: echo "hello world"
+
+  #     - name: checkout
+  #       uses: actions/checkout@v6.0.2
+
+  #     - name: List files in a directory
+  #       run: |
+  #         echo The repository ${{ github.repository }} contains the following files
+  #         tree
+      
+  #     - name: workflow inputs
+  #       run: |
+  #         echo "Homedrive: ${{inputs.homedrive}}"
+  #         echo "Log level: ${{inputs.loglevel}}"
+  #         echo "Tag source: ${{inputs.tag}}"
+  #         echo "Environment: ${{inputs.environment}}"
+  #       if: ${{github.event_name == 'workflow_dispatch'}}
+  
+  deploy:
+    if: ${{ github.ref == 'refs.heads.main'}}
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     steps:
-      - run: echo "hello world"
-
-      - name: checkout
-        uses: actions/checkout@v6.0.2
-
-      - name: List files in a directory
-        run: |
-          echo The repository ${{ github.repository }} contains the following files
-          tree
-      
-      - name: workflow inputs
-        run: |
-          echo "Homedrive: ${{inputs.homedrive}}"
-          echo "Log level: ${{inputs.loglevel}}"
-          echo "Tag source: ${{inputs.tag}}"
-          echo "Environment: ${{inputs.environment}}"
-        if: ${{github.event_name == 'workflow_dispatch'}}
+     - name: Print APP_NAME variable
+       run: echo ${{ vars.APP_NAME}}
+     
+     - name: Print APP_SECRET variable
+       run: echo ${{ secrets.APP_SECRET}}
