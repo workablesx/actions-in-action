@@ -30,6 +30,7 @@ on:
 
       tag:
         description: 'Apply tag after successful run'
+        type: boolean
         required: true
 
       environment:
