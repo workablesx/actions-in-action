@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: "job 1"
         run: "echo Job: ${{ github.job }}"
+        shell: bash
   
   job_2:
     runs-on: ubuntu-latest
@@ -15,6 +16,7 @@ jobs:
     steps:
       - name: "job 2"  
         run: "echo Job: ${{ github.job }}"
+        shell: bash
   
   job_3:
     runs-on: ubuntu-latest
